@@ -1,0 +1,168 @@
+:root {
+    --bg-color: #667fa4; 
+    --container-bg: #1e293b; 
+    --board-line-color: #334155; 
+    --cell-bg: #0f172a; 
+    --text-primary: #f8fafc;
+    --text-muted: #94a3b8;
+    --x-color: #fb7185; 
+    --o-color: #38bdf8;
+    --bright-blue: #00d2ff;
+    --cell-size: 80px;
+    --border-radius: 12px;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+    background-color: var(--container-bg);
+    padding: 2rem;
+    border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    width: fit-content; 
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+h1 {
+    color: var(--text-primary);
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+#difficulty {
+    appearance: none; /* Removes default browser arrow */
+    background-color: var(--cell-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--board-line-color);
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    width: 60%;
+    max-width: 200px;
+    text-align: center;
+    transition: all 0.3s ease;
+    outline: none;
+    
+    /* Custom Arrow Icon */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23f8fafc'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+}
+
+#difficulty:not(:disabled):hover {
+    border-color: var(--bright-blue);
+    background-color: #1e293b;
+    box-shadow: 0 0 10px rgba(0, 210, 255, 0.2);
+}
+
+#difficulty:not(:disabled):focus {
+    border-color: var(--o-color);
+    box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.3);
+}
+
+.bright-blue {
+    color: var(--bright-blue);
+}
+
+.status {
+    display: inline-block;
+    font-size: 0.8rem; 
+    font-weight: 800; 
+    margin-bottom: 25px;
+    padding: 6px 16px;
+    background: #0f172a; 
+    border-radius: 8px;
+    color: #ffffff; 
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border: 1px solid var(--board-line-color);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    animation: statusPulse 2s infinite ease-in-out;
+}
+
+@keyframes statusPulse {
+    0% { transform: scale(1); border-color: var(--board-line-color); }
+    50% { transform: scale(1.02); border-color: var(--x-color); }
+    100% { transform: scale(1); border-color: var(--board-line-color); }
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(3, var(--cell-size));
+    grid-template-rows: repeat(3, var(--cell-size));
+    gap: 8px; 
+    background-color: var(--board-line-color); 
+    padding: 8px;
+    border-radius: 16px;
+    margin: 0 auto 25px;
+    width: fit-content;
+}
+
+.cell, .cell-x, .cell-o {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    background-color: var(--cell-bg); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 8px;
+}
+
+.cell:hover {
+    background-color: #1e293b;
+}
+
+.cell-content {
+    width: 60%;
+    height: 60%;
+}
+
+.cell-x svg line {
+    stroke: var(--x-color) !important;
+}
+
+.cell-o svg circle {
+    stroke: var(--o-color) !important;
+}
+
+#resetButton {
+    padding: 12px 30px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: var(--cell-bg);
+    background-color: var(--text-primary);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#resetButton:hover {
+    background-color: #ff4d4d; 
+    color: white;
+    transform: scale(1.1); 
+    box-shadow: 0 5px 15px rgba(255, 77, 77, 0.4);
+}
+
+#resetButton:active {
+    transform: scale(1);
+}
