@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading Spinner</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="gooey-wrapper">
+        <div class="spinner-box">
+            <span class="circle"></span>
+            <span class="circle"></span>
+            <span class="circle"></span>
+            <span class="circle"></span>
+        </div>
+
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display:none;">
+            <defs>
+                <filter id="gooey">
+                    <!-- Blur the objects -->
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                    <!-- Increase contrast of the alpha channel to make edges sharp -->
+                    <feColorMatrix in="blur" mode="matrix"
+                        values="
+                            1 0 0 0 0
+                            0 1 0 0 0
+                            0 0 1 0 0
+                            0 0 0 20 -10
+                        "
+                        result="gooey" 
+                    />
+                    <!-- Ensure the circles stay on top -->
+                    <feComposite in="SourceGraphic" in2="gooey" operator="atop" />
+                </filter>
+            </defs>
+        </svg>
+    </div>
+</body>
+</html>

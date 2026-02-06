@@ -1,0 +1,152 @@
+:root {
+    --background-color: #000000;
+    --gap: 20px;
+    --animation-duration: 2s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.gooey-wrapper {
+    filter: url('#gooey');
+    display: flex;
+    justify-items: center;
+    align-items: center;
+}
+
+.spinner-box {
+    width: 180px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: var(--gap);
+    aspect-ratio: 1;
+    animation: spin var(--animation-duration) linear infinite;
+}
+
+.circle {
+    border-radius: 50%;
+    width: 100%;
+    aspect-ratio: 1;
+
+    /* Allows the shapes to bleed into each other */
+    filter: blur(10px);
+
+    /* Prepares the GPU for animations */
+    will-change: transform, opacity;
+    animation: merge-and-scale var(--animation-duration) infinite ease-in-out;
+}
+
+/* Assigning x and y variables to each spinner */
+.circle:nth-of-type(1) { 
+    --x: calc(50% + var(--gap) / 2); 
+    --y: calc(50% + var(--gap) / 2); 
+    background-color: #ff0055; 
+}
+
+.circle:nth-of-type(2) { 
+    --x: calc(-50% - var(--gap) / 2); 
+    --y: calc(50% + var(--gap) / 2); 
+    background-color: #0040ff; 
+}
+
+.circle:nth-of-type(3) { 
+    --x: calc(50% + var(--gap) / 2); 
+    --y: calc(-50% - var(--gap) / 2); 
+    background-color: #ffcc00; 
+}
+
+.circle:nth-of-type(4) { 
+    --x: calc(-50% - var(--gap) / 2); 
+    --y: calc(-50% - var(--gap) / 2); 
+    background-color: #01ff52; 
+}
+
+@keyframes spin {
+    0%, 10% { transform: rotate(0deg); }
+    45%, 55% { transform: rotate(180deg); }
+    90%, 100% { transform: rotate(360deg); }
+}
+
+@keyframes merge-and-scale {
+    0%, 10%, 90%, 100% { 
+        transform: translate(0, 0) scale(1); 
+        opacity: 0.7; 
+    }
+    45%, 55% { 
+        transform: translate(var(--x), var(--y)) scale(0.9);  
+        opacity: 1; 
+    }
+}
+
+/* .circle:nth-of-type(1) {
+    background-color: #ff0055;
+    animation: merge-1 var(--animation-duration) infinite ease-in-out;
+}
+
+.circle:nth-of-type(2) {
+    background-color: #0040ff;
+    animation: merge-2 var(--animation-duration) infinite ease-in-out;
+}
+
+.circle:nth-of-type(3) {
+    background-color: #ffcc00;
+    animation: merge-3 var(--animation-duration) infinite ease-in-out;
+}
+
+.circle:nth-of-type(4) {
+    background-color: #01ff52;
+    animation: merge-4 var(--animation-duration) infinite ease-in-out;
+}
+
+@keyframes merge-1 {
+    0%, 10%, 90%, 100% { 
+        transform: translate(0, 0) scale(1); 
+        opacity: 0.7; 
+    }
+    45%, 55% { 
+        transform: translate(calc(50% + var(--gap) / 2), calc(50% + var(--gap) / 2)) scale(0.9); 
+        opacity: 1; 
+    }
+}
+
+@keyframes merge-2 {
+    0%, 10%, 90%, 100% { 
+        transform: translate(0, 0) scale(1); opacity: 0.7; }
+    45%, 55% { 
+        transform: translate(calc(-50% - var(--gap) / 2), calc(50% + var(--gap) / 2)) scale(0.9); 
+        opacity: 1; 
+    }
+}
+
+@keyframes merge-3 {
+    0%, 10%, 90%, 100% { 
+        transform: translate(0, 0) scale(1); opacity: 0.7; }
+    45%, 55% {
+         
+        transform: translate(calc(50% + var(--gap) / 2), calc(-50% - var(--gap) / 2)) scale(0.9); 
+        opacity: 1; 
+    }
+}
+
+@keyframes merge-4 {
+    0%, 10%, 90%, 100% {
+        transform: translate(0, 0) scale(1); opacity: 0.7; }
+    45%, 55% { 
+        transform: translate(calc(-50% - var(--gap) / 2), calc(-50% - var(--gap) / 2)) scale(0.9); 
+        opacity: 1; 
+    }
+} */
